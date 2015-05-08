@@ -26,24 +26,36 @@ Data is stored in flat files w/ JSON format using the [Fllat Class](https://gith
 
 ##Libraries
 -Fllat | Flat database Class(php)
+
 -jQuery 
+
 -Angular.js
+
 -Bourbon 
+
 -Bourbon Neat
+
 -Font Awesome
+
 -jStorage
+
 -SweetAlert
 
 ##Server Dependencies
 -Web Server (Nginx, Apache, etc)
+
 -PHP
+
 -Mcrypt
 
 
 ## To-Do
 -Add indicator for active section into navi links
+
 -Add validation for email, domains
+
 -Remove console.log and .warn for testing from code
+
 -Clean up extreneous files from lib & php-lib
 
 
