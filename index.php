@@ -1,12 +1,12 @@
 <?php
-
-	include("./_bin/php-lib/the_class.php");
+//	
+	require_once("./config.php");
+//	require_once(_PHPLIB."the_func.php");
 	
-	header("Content-Type:application/json");
+	$template = file_get_contents(_VIEWDIR."template.html");
 	
-	$crawler = new PGCrawl("http://appblokes.com");
+//	$render = str_replace("",_,$template);
 	
-	die(json_encode($crawler->getLinksMinusR(2),JSON_PRETTY_PRINT));
-	
-	
+	header("Content-Type:text/html");
+	exit($template);
 ?>
