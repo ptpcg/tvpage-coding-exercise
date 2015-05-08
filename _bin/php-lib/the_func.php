@@ -18,7 +18,7 @@ function gen_tkn(){
 	//return (String) 
 	
 	$tkn = rand_str();
-	$salt = gen_pwd(randStr(128));
+	$salt = gen_pwd(rand_str(128));
 	
 	$token = gen_pwd($tkn,$salt);
 	
