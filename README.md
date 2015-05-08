@@ -1,6 +1,3 @@
-# tvpage-coding-exercise
-App for TVPage Coding task
-
 Link Crawl App
 =====
 
