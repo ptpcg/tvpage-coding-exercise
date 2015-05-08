@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="pgCrawl">
+	<head>
+		<link rel="stylesheet" href="./_lib/bower_components/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="./_lib/bower_components/sweetalert/lib/sweet-alert.css">
+		<link rel="stylesheet" href="./css/tvpce.css">
+	</head>
+	<body ng-controller="appCtrl">
+		<div id="header" class="">
+			<div class="brand col-4">
+				<h1 ng-click="view.ch('query')"><i id="app_icon" class="fa fa-fw fa-bug"></i><span id="app_name">Link Crawl App</span></h1>
+			</div>
+			<div id="mobile_menu" class="">
+				<h1><i class="fa fa-fw fa-lg fa-bars"></i></h1>
+			</div>
+			<div id="navi" class="navi col-6">
+				<ul>
+					<li ng-click="view.ch('query')" ng-show="crawling"><a  class="navi-a" href="javascript:void(0)"><i class="fa fa-fw fa-bug"></i><span>Crawling...</span></a></li>
+					<li ng-click="view.ch('query')" ng-show="!crawling"><a class="navi-a" href="javascript:void(0)"><i class="fa fa-fw fa-bug"></i><span>Crawl</span></a></li>
+					<li  ng-click="view.ch('history')"><a class="navi-a" href="javascript:void(0)"><i class="fa fa-fw fa-clock-o"></i><span>History</span></a></li>
+					<li ng-click="view.ch('user')" ><a class="navi-a" href="javascript:void(0)"><i class="fa fa-fw fa-user"></i>
+						<span ng-if="!user.email">[Guest]</span><span ng-if="user.email">{{user.email}}</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="main">
+			<!-- MAIN/QUERY SECTION -->
+			<div id="query" class="section col-12">
+				<div id="query_inputs" ng-hide="crawling" class="col-10 col-shift-1">
+					<form name="query_form">
+						<input name="query" ng-model="crawl.url" type="text" id="query" placeholder="Enter URL To Query" class="query" />
+						<select ng-model="crawl.depth" name="depth" id="depth">
+							<option value="0">Crawl Depth 0</option>
+							<option value="1">Crawl Depth 1</option>
+							<option value="2">Crawl Depth 2</option>
+							<option value="3">Crawl Depth 3</option>
+						</select>
+						<div ng-click="crawl.run()" id="crawl_btn" class="query btn" value="" >
+							<i class="fa fa-fw fa-bug"></i>Crawl For Links
+						</div>
+					</form>
+				</div>
+				<div id="query_proc" ng-hide="!crawling" class="crawling col-10 col-shift-1">
+					<h1><i class="fa fa-fw fa-bug"></i>CRAWLING...</h1>
+				</div>
+			</div>
+			
+			<!-- CRAWL HISTORY -->
+			<div id="history" class="section col-12">
+				<h1>History</h1>
+				
+				<div id="history_list" class="col-8 col-shift-2">
+					<div class="li history-lis" ng-repeat="li in history.list">
+						<h1>{{li.url}}</h1>
+						<div class="detail">
+							<div class="time">{{li.time}}</div>
+							<div ng-if="!li.placeholder" class="links">Domains Linked: {{li.link_count}}</div>
+							<div ng-if="!li.placeholder" class="rec-lvl"> Crawl Depth: {{li.depth}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- CRAWL REPORT W/ CHART!-->
+			<div id="report" class="section col-12">
+				
+				<div class="report">
+					<h1>Crawl Report ({{report.url}})</h1>
+					<div class="detail">
+						<div class="details time">Crawl Time: {{report.time}}</div>
+						<div class="details links">Domains Linked: {{report.link_count}}</div>
+						<div class="details rec-lvl"> Crawl Depth: {{report.MinusR}}</div>
+					    
+						<div class="graph">
+							<h2 class="subhead"># Links Per Domain</h2><hr />
+							<canvas id="report_graph"></canvas>
+						</div>
+					    <div class="domains drop-down">
+					        <h2 class="subhead">Domains & Links</h2><hr />
+					        <div class="domain report-domain" title="Click To Hide All Links">
+					            <h2><i class="fa fa-fw fa-times-circle"></i>Hide Link Detail</h2>
+					            
+					        </div>
+					        <div class="domain report-domain" ng-repeat="dom in report.domains" title="Click To Toggle Links">
+							
+					            <h2>{{dom}}</h2>
+					            <div class="link-float">
+							        <ul class="links">
+							            <li>
+							            LINKS<hr/>
+							            </li>
+							            <li ng-repeat="link in report.links[dom]">{{link}}</li>
+							        </ul>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<!-- USER SECTION -->
+			<div id="user" class="section col-12">
+				<h1>{{user.email}}</h1>
+				<div ng-show="!user.authed" id="login" class="col-8 col-shift-2">
+					<input name="query" ng-model="user._email" type="text" id="email" placeholder="Enter Your Email" class="input" />
+					<input name="query" ng-model="user._pwd" type="text" id="pwd" placeholder="Enter Password" class="input" />
+					<div ng-click="user.auth.run()" id="login_btn" class="btn" value="" >
+						<i class="fa fa-fw fa-bug"></i>Login
+					</div>
+					<div ng-click="user.reg()" id="reg_btn" class="btn reg" value="" >
+						<i class="fa fa-fw fa-bug"></i>Register
+					</div>
+				</div>
+				<div  ng-show="user.authed" id="authd" class="col-8 col-shift-2">
+					<div ng-click="user.logout()" id="logout_btn" class="query btn" value="" >
+						<i class="fa fa-fw fa-bomb"></i>Logout
+					</div>
+					<div ng-click="history.clearConf()" id="clear_history_btn" class=" btn" value="" >
+						<i class="fa fa-fw fa-bomb"></i>CLEAR HISTORY
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--JS GOES HERE!-->
+		<script src="./_lib/bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+		<script src="./_lib/bower_components/angular/angular.min.js" type="text/javascript"></script>
+		<script src="./_lib/bower_components/jstorage/jstorage.js" type="text/javascript"></script>
+		<script src="./_lib/bower_components/sweetalert/lib/sweet-alert.js" type="text/javascript"></script>
+		<script src="./_lib/bower_components/chartjs/Chart.min.js" type="text/javascript"></script>
+		<script src="./js/app.js" type="text/javascript"></script>
+	</body>
+</html>
