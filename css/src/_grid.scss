@@ -1,0 +1,87 @@
+
+//breakpoints
+
+	$mobile: max-width em(480);
+	$hybrid: min-width em(481) max-width em(1023);
+	$desk: min-width em(1024);
+	//grid loops
+	$sizes: 12;
+	
+	@while $sizes > 0{
+
+	  .col-#{$sizes}{
+		
+			@include span-columns(12);
+			@include media($desk){
+				@include span-columns($sizes);
+			}
+			@include media($mobile){
+				input{
+					width: 100%;
+					margin:0;
+					margin-top: .5em;
+				}
+			}
+		margin:0;
+	  }
+	  .col-pad-#{$sizes}{
+		@include span-columns($sizes);
+		@include media($mobile){
+			@include span-columns(0);
+		}
+		@include media($hybrid){
+			@include span-columns(0);
+		}
+	  }
+	  .col-shift-#{$sizes}{
+		@include shift($sizes);
+		@include media($mobile){
+			@include shift(0);
+		}
+		@include media($hybrid){
+			@include shift(0);
+		}
+	  }
+		 
+	  $sizes: $sizes - 1;
+	}
+
+	
+	.show-mobile{
+		@include media($mobile){
+			display:inline-block !important;
+		}
+		@include media($desk){
+			display:none !important;
+		}
+		@include media($hybrid){
+			display:none !important;
+		}
+	}
+
+	.show-hyb{
+		display:none;
+		@include media($mobile){
+			display:none !important;
+		}
+		@include media($hybrid){
+			display:inline-block;
+		}
+		@include media($desk){
+			display:none !important;
+		}
+	}
+
+
+	.show-desk{
+		display:none;
+		@include media($mobile){
+			display:none !important;
+		}
+		@include media($hybrid){
+			display:none !important;
+		}
+		@include media($desk){
+			display:inline-block !important;
+		}
+	}

@@ -1,0 +1,22 @@
+
+//
+//@mixin Button maker mixin
+//
+//
+@mixin btn($bg,$txt){
+
+	width:100%;
+	margin: 0;
+	margin-bottom: .5em;
+	border-radius:0;
+	cursor:pointer;
+	background:$bg;
+	color:$txt;
+	&:hover{
+		background: lighten($bg,15%);
+	}
+	&:active{
+		background: lighten($bg,5%);
+		color:darken($txt,5%);
+	}
+}

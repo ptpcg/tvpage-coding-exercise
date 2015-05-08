@@ -1,0 +1,456 @@
+
+//imports
+	@import "../../_lib/bower_components/bourbon/app/assets/stylesheets/bourbon";//bourbon
+	@import "../../_lib/bower_components/neat/app/assets/stylesheets/neat";//bourbon-neat
+	@import "colors"; //reused colors color helper classes
+	@import "refills"; //bourbon components & random mixins
+	@import "grid"; //breakpoints, grid stuff
+	
+	
+//styling
+	
+	body,html{
+		height:100%;
+		margin:0;
+		padding:0;
+		font-family: 'Roboto, Open-Sans', sans-serif;
+	}
+	h1{
+	    color:$alt_txt;
+	}
+	.subhead{
+		color:$alt_txt;
+		text-align:center;
+	}
+	#wrap{
+		
+		@include fill-parent;
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+	}
+	//header
+	#header{
+		background:$main;
+		color:$alt_txt;
+		width: 100%;
+		height: 4em;
+		top:0;
+		position:fixed;
+		z-index:999;
+		&.big{
+			background:$alt_dark;
+			color:$txt;
+		}
+		.brand{
+			padding-left: 2em;
+			margin-left: 2.5%;
+			#app_name{
+				//display:none;
+			}
+			@include media($mobile){
+				font-size: 1em;
+			}
+			@include media($hybrid){
+				font-size: 1em;
+			}
+			@include media($desk){
+				font-size: 1em;
+				#app_name{
+					display:inline;
+				}
+			}
+		}
+		
+		#mobile_menu{
+			position:absolute;
+			float:left;
+			right: 1em;
+			top: 0;
+			width: 3em;
+			height: 3em;
+			@include media($desk){
+				display:none;
+			}
+		}
+		.navi{
+			height: auto;
+			@include clearfix;
+			text-align:center;
+			
+			display:none;
+			background: $alt_dark;
+			
+			@include media($mobile){
+				font-size:1.25em;
+			}
+			@include media($hybrid){
+				font-size: 1.5em;
+			}
+			a,a:visited{
+				color: $txt;
+				text-decoration:none;
+				&:hover{
+					color:transparentize($txt,.2);
+				}
+			}
+			
+			ul{
+				list-type:none;
+				margin: 0;
+				padding:0;
+				li{
+					width: 100% !important;
+					height:2.5em;
+					padding-top: .5em;
+					display:inline-block;
+					&:hover{
+						background:lighten($alt_dark,20%);
+						transition: 0.2s;
+					}
+				}
+			}
+			@include media($desk){
+				background: none;
+				float:right;
+				text-align: right;
+				display:block;
+				margin-right: 1em;
+				font-size: 1.25em;
+				margin-top: 1.5em;
+				
+				a,a:visited{
+					color: $alt_txt;
+					&:hover{
+						color:$alt_txt;
+						span{
+							color:lighten($alt_txt,20%);
+						}
+					}
+				}
+				
+				ul{
+					list-type:none;
+					margin: 0;
+					li{
+						display:inline;
+						margin-right:.25em;
+						font-size:1.25em;
+						&:last-child{
+							margin: 0;
+						}
+						span{
+							display:none;
+						}
+						&:hover{
+							background:none;
+							transition: 0.2s;
+							span{
+								display:inline-block;
+								
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	//content
+	#main{
+		background: $main;
+		@include clearfix;
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+		
+		padding-top: 5em;
+		
+		@include media($mobile){
+
+		}
+		@include media($hybrid){
+		
+		}
+		@include media($desk){
+			padding: 1em;
+			padding-top: 5em;
+		}
+		.section{
+			display: none;
+			
+			h1:first-child{
+				text-align:center;
+			}
+		}
+		#query{
+			display: inline-block;
+			#query_inputs{
+				margin-top: 12.5%;
+				input,select{
+					height: 2em;
+					font-size:1.8em;
+					padding: .1em;
+					color:$alt_txt;
+					border:none;
+					text-align:center;
+					border-radius: 0.125em;
+				}
+				#crawl_btn{
+					@extend input;
+					cursor:pointer;
+					background: $dark_btn;
+					width:100%;
+					margin: 0;
+					border-radius:0;
+					@include media($desk){
+						width: 40%;
+						margin-left: 30%;
+						border-radius: 0.125em;
+					}
+					color:$txt;
+					margin-top: 1em;
+					padding-top: .5em;
+					text-align:center;
+					&:hover{
+						background: lighten($dark_btn,15%);
+					}
+					&:active{
+						background: lighten($dark_btn,5%);
+						color:darken($txt,5%);
+					}
+				}
+				.query{
+					width:100%;
+					margin: 0;
+					border-radius:0;
+					margin-right:0;
+					@include media($desk){
+						width: 70%;
+						margin-left: 15%;
+						border-radius: 0.125em;
+					}
+				}
+				
+				#depth{
+					width:100%;
+					//border-left:1px solid $alt_dark;
+					//border-top-left-radius:0;
+					//border-bottom-left-radius:0;
+					border-radius:0;
+					margin-right:0;
+					margin-top:.5em;
+					@include media($desk){
+						width: 20%;
+						margin-left:40%;
+						border-radius: 0.125em;
+					}
+				}
+			}
+			#query_proc{
+				margin-top: 15%;
+				//display:none;
+				text-align:center;
+				color:$alt_txt;
+				font-size: 1.5em;
+			}
+		}
+		#report{
+			height: 100%;
+			.report{
+				height:100%;
+				.graph{
+					@include clearfix;
+					#report_graph{
+						height:em(400);
+						width: 80%;
+						margin-left:10%;
+					}
+				}
+				.detail{
+					background:$alt_light;
+					width:100%;
+					border-radius:.25em;
+					padding:1em;
+					
+					position:relative;
+					.details{
+						font-size: 1.25em;
+						font-weight: bold;	
+					}
+					.domains{
+						@include clearfix;
+						.domain{
+							@include btn($dark_btn,$txt);
+							display:inline-block;
+							
+							@include media($desk){
+								margin:1em;
+								width:30%;
+							}
+							padding: .5em;
+							text-align:center;
+							float:left;
+							background: $dark_btn;
+							border-radius:.125em;
+							position:relative;
+							.link-float{
+								background: inherit;
+								width:100%;
+								@include clearfix;
+								position:absolute;
+								display:none;
+								float:left;
+								left:0;
+								border-radius:inherit;
+								padding:.5em;
+								z-index:100;
+								.links{
+									background:$alt_light;
+									color:$alt_txt;
+									font-weight:bold;
+									font-size:1em;
+									list-style:none;
+									padding:.5em;
+									margin:0;
+									li{
+										width:100%;
+										word-break: break-all;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		#history{
+			//margin-top: 5%;
+			color:$alt_txt;
+			height: 100%;
+			.head{
+				text-align:center;
+				width: 100%;
+				margin-left:0;
+				margin-right:0;
+			}
+			#history_list{
+			
+				.li{
+					width: 100%;
+					margin:0;
+					margin-bottom: .5em;
+					background:$alt_light;
+					padding: 1em;
+					h1{
+						text-align:left;
+					}
+					.domain{
+						font-size:1.25em;
+					}
+					.detail{
+						text-align:right;
+						padding-bottom: 1em;
+						font-weight:bold;
+					}
+					.rec-lvl{
+						width:auto;
+						float:right;
+						margin-right:1em;
+												
+					}
+					.links{
+						@extend .rec-lvl;
+					}
+					
+					.time{
+						@extend .rec-lvl;
+						float:left;
+					}
+					
+				}
+			}
+		}
+		#user{
+			
+			margin-top: 5%;
+			input,select{
+				height: 2em;
+				font-size:1.8em;
+				padding: .1em;
+				color:$alt_txt;
+				border:none;
+				text-align:center;
+				border-radius: 0.125em;
+			}
+			.btn{
+				@extend input;
+				cursor:pointer;
+				background: lighten($alt_dark,10%);
+				width:100%;
+				margin: 0;
+				border-radius:0;
+				@include media($desk){
+					width: 40%;
+					margin-left: 30%;
+					border-radius: 0.125em;
+				}
+				color:$txt;
+				margin-top: 1em;
+				padding-top: .5em;
+				text-align:center;
+				
+				&:hover{
+					background: lighten($alt_dark,15%);
+				}
+				&:active{
+					background: lighten($alt_dark,5%);
+					color:darken($txt,5%);
+				}
+				&.reg{
+					color:$alt_txt;
+					background:$yay;
+					&:hover{
+						background: lighten($yay,15%);
+					}
+					&:active{
+						background: lighten($yay,5%);
+						color:darken($alt_txt,5%);
+					}
+				}
+			}
+			#clear_history_btn{
+				
+					background:$aww;
+					color:$txt;
+					&:hover{
+						background: lighten($aww,15%);
+					}
+					&:active{
+						background: lighten($aww,5%);
+						color:darken($txt,5%);
+					}
+			}
+			.input{
+				width:100%;
+				margin: 0;
+				margin-bottom: 1em;
+				border-radius:0;
+				margin-right:0;
+				@include media($desk){
+					width: 70%;
+					margin-left: 15%;
+					border-radius: 0.125em;
+				}
+			}
+		}
+	}
+	
+	//footer
+	
+	#footer{
+		background:$alt_dark;
+		color:$txt;
+		width: 100%;
+		height: 4em;
+	}
