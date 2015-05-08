@@ -60,7 +60,7 @@ class PGCrawl{
 				   	$url_bits = explode("/",$url);
 					$domain = $url_bits[2];
 					
-					if(!in_array($domain,$this->domains)){
+					if(!in_array($domain,$this->domains) && strlen($domain) > 1){
 						$this->domains[] = $domain;
 					}
 					
@@ -94,19 +94,23 @@ class PGCrawl{
 		//get top level urls
 		$links = $this->getLinks();
 		$levels["MinusR"] = $rlevel;
-		$levels["domains"] = array();
 		$levels["url"] = $this->url;
 		
-		//loop through the rest 
-		while($levels2go > $level){
+		$levels["domains"] = $this->domains;
+		$levels["links"] = $this->links;
+		$levels["time"] = date(_TIME_FORMAT);
 		
-			$level++;
+		//loop through urls 
+		while($levels2go > $level){
 			foreach($links["local_pgs"] as $link){
 				$link = $this->proto."//".$this->domain.$link;
 				$links = $this->getLinks($link);
 			}
 			$levels["domains"] = $this->domains;
 			$levels["links"] = $this->links;
+			$levels["time"] = date(_TIME_FORMAT);
+		
+			$level++;
 		}
 		
 		$this->last_crawl = $levels;
