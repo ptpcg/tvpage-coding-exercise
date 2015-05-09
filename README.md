@@ -3,6 +3,9 @@ Link Crawl App
 
 *App for TVPage Coding task*
 
+## Hours Spent
+*~15*
+
 ## Introduction
 
 Feel free to test it out on the [The Link Crawler App](http://dev.ptpcg.com/tvp). 
