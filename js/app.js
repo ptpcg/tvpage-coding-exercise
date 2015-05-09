@@ -104,6 +104,7 @@ var _APP = {
     						}else{
     							if(mode === "logout"){
     								$scope.user.authed = false;
+    								$scope.user.email = null;
 									swal({
 										title:"Logged Out",
 										text:"Your crawl history will no longer be linked to "+rtn.email,

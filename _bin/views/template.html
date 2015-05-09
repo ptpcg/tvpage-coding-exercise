@@ -108,7 +108,7 @@
 					<input name="query" ng-model="user._email" type="text" id="email" placeholder="Enter Your Email" class="input" />
 					<input name="query" ng-model="user._pwd" type="password" id="pwd" placeholder="Enter Password" class="input" />
 					<div ng-click="user.auth.run()" id="login_btn" class="btn" value="" >
-						<i class="fa fa-fw fa-sign-out"></i>Login
+						<i class="fa fa-fw fa-sign-in"></i>Login
 					</div>
 					<div ng-click="user.auth.reg()" id="reg_btn" class="btn reg" value="" >
 						<i class="fa fa-fw fa-bug"></i>Register
@@ -116,7 +116,7 @@
 				</div>
 				<div  ng-show="user.authed" id="authd" class="col-8 col-shift-2">
 					<div ng-click="user.logout()" id="logout_btn" class="query btn" value="" >
-						<i class="fa fa-fw fa-bomb"></i>Logout
+						<i class="fa fa-fw fa-sign-out"></i>Logout
 					</div>
 					<div ng-click="history.clearConf()" id="clear_history_btn" class=" btn" value="" >
 						<i class="fa fa-fw fa-bomb"></i>CLEAR HISTORY
