@@ -106,11 +106,11 @@
 				<h1>{{user.email}}</h1>
 				<div ng-show="!user.authed" id="login" class="col-8 col-shift-2">
 					<input name="query" ng-model="user._email" type="text" id="email" placeholder="Enter Your Email" class="input" />
-					<input name="query" ng-model="user._pwd" type="text" id="pwd" placeholder="Enter Password" class="input" />
+					<input name="query" ng-model="user._pwd" type="password" id="pwd" placeholder="Enter Password" class="input" />
 					<div ng-click="user.auth.run()" id="login_btn" class="btn" value="" >
-						<i class="fa fa-fw fa-bug"></i>Login
+						<i class="fa fa-fw fa-sign-out"></i>Login
 					</div>
-					<div ng-click="user.reg()" id="reg_btn" class="btn reg" value="" >
+					<div ng-click="user.auth.reg()" id="reg_btn" class="btn reg" value="" >
 						<i class="fa fa-fw fa-bug"></i>Register
 					</div>
 				</div>

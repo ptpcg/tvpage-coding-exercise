@@ -81,13 +81,26 @@ var _APP = {
     						if(rtn.email){
     							$scope.user.authed = true;
     							$scope.user.email = rtn.email;
-								if(mode !== "init"){
-									swal({
-										title:"Authenticated",
-										text:"Your crawl history will be linked to "+rtn.email,
-										type:"success"
-									});
-								}
+    							switch(mode){
+    								default:
+										swal({
+											title:"Authenticated",
+											text:"Your crawl history will be linked to "+rtn.email,
+											type:"success"
+										});
+    								break;
+    								case "init":
+    									//do nothing
+    								break;
+    								case "reg":
+										swal({
+											title:"Registered!",
+											text:"Your crawl history will be linked to "+rtn.email,
+											type:"success"
+										});
+    									
+    								break;
+    							}
     						}else{
     							if(mode === "logout"){
     								$scope.user.authed = false;
@@ -101,11 +114,20 @@ var _APP = {
     						}
     						$scope.user.tkn = rtn.tkn;
     					}else{
-    						swal({
-    							title:"Authentication Failed",
-    							text:rtn.msg,
-    							type:"error"
-    						});
+    						
+							if(mode == "reg"){
+								swal({
+									title:"Registation Failed",
+									text:rtn.msg,
+									type:"error"
+								});
+							}else{
+								swal({
+									title:"Authentication Failed",
+									text:rtn.msg,
+									type:"error"
+								});
+							}
     					}
     					
     					$scope.$apply();
@@ -135,6 +157,14 @@ var _APP = {
 		    					act:"logout"
 		    				};
     					break;
+    					case "reg":
+		    				reqData = {
+		    					sect:"user",
+		    					act:"reg",
+								_email:$scope.user._email,
+								_pwd:$scope.user._pwd
+		    				};
+    					break;
     					default:
 							reqData = {
 								sect:"user",
@@ -154,8 +184,11 @@ var _APP = {
     				  success: runRtn,
     				  error:runFail
     				});
-    			}
+    			},
 			
+				reg:function(){
+				    $scope.user.auth.run("reg");
+				}
 			},
 			logout:function(){
 		        $scope.user.auth.run("logout");

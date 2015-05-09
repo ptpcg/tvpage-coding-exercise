@@ -86,6 +86,11 @@ function register_user($tkn,$email,$pwd,$db){
 			$reg["ok"] = true;
 			
 			
+			//update session 
+			session_start();
+		
+			$_SESSION["tkn"] = $tkn;
+			$_SESSION["email"] = $email;
 		}
 		unset($reg["pwd"]);
 		return $reg;
