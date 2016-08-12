@@ -8,7 +8,7 @@ Link Crawl App
 
 ## Introduction
 
-Feel free to test it out on the [The Link Crawler App](http://dev.ptpcg.com/tvp). 
+Feel free to test it out on the [The Link Crawler App](http://patrick.morgandigitaldevelopment.com/dev/ptpcg/tvp/). 
 
 The Link Crawler App allows you to enter a valid url, and get a list of all domains that the url is linking to.
 
